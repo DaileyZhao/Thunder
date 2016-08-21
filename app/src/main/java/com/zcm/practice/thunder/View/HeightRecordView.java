@@ -9,7 +9,7 @@ import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.zcm.practice.thunder.Activity.OnRecordSelectCallBack;
+import com.zcm.practice.thunder.CallBack.OnRecordSelectCallBack;
 import com.zcm.practice.thunder.R;
 import com.zcm.practice.thunder.Util.MiscUtil;
 
