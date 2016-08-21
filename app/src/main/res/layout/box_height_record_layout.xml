@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_record"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/scroolview"
+        android:layout_marginLeft="229dp"
+        android:textColor="#ff6600"
+        android:textSize="18sp"
+        />
+
+    <TextView
+        android:id="@+id/tv_height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_record"
+        android:layout_marginTop="40dp"
+        android:text="身高（cm）"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        />
+
+
+    <HorizontalScrollView
+        android:id="@+id/scroolview"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_below="@+id/tv_record"
+        android:layout_marginTop="40dp"
+        android:layout_toRightOf="@+id/tv_height"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:orientation="horizontal">
+
+            <com.zcm.practice.thunder.View.RuleView
+                android:id="@+id/ruleview"
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                />
+        </LinearLayout>
+
+
+    </HorizontalScrollView>
+
+    <TextView
+        android:layout_width="2dp"
+        android:layout_height="50dp"
+        android:layout_alignLeft="@+id/scroolview"
+        android:layout_below="@+id/tv_record"
+        android:layout_marginLeft="219dp"
+        android:layout_marginTop="15dp"
+        android:background="#ff6600"/>
+
+</RelativeLayout>
