@@ -10,15 +10,15 @@
         android:theme="@style/AppTheme">
 
         <activity android:name=".Activity.CreateAvatarActivity">
-
-        </activity>
-        <activity android:name=".Activity.BoxWeightHeightActivity"
-            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".Activity.BoxWeightHeightActivity"
+            android:screenOrientation="landscape">
+
         </activity>
     </application>
 </manifest>
