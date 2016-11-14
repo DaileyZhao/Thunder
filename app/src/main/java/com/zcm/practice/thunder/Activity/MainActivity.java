@@ -1,6 +1,10 @@
 package com.zcm.practice.thunder.Activity;
 
-import com.zcm.practice.thunder.BaseActivity;
+import android.app.Activity;
+import android.os.Bundle;
+
+import com.zcm.practice.thunder.R;
+
 
 /**
  * Copyright(c) 2016 All Rights Reserved.
@@ -11,5 +15,10 @@ import com.zcm.practice.thunder.BaseActivity;
  * ProjectName: Thunder
  * Description: TODO
  */
-public class MainActivity extends BaseActivity {
+public class MainActivity extends Activity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.mainactivity);
+    }
 }

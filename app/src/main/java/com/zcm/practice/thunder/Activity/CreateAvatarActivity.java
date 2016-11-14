@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.zcm.practice.thunder.BaseActivity;
 import com.zcm.practice.thunder.R;
 
@@ -48,6 +49,7 @@ public class CreateAvatarActivity extends BaseActivity {
                 Toast.makeText(CreateAvatarActivity.this, "button可用!", Toast.LENGTH_SHORT).show();
             }
         });
+        Glide.with(this).load("http://box-upload-test.oss-cn-hangzhou.aliyuncs.com/user/2016/91/10/headIcon/bd3df700d082429873c4190bb527b60d.png").into(allot_avatar);
         name_edit.addTextChangedListener(new TextWatcher() {
             private CharSequence temp;
             private int selectionStart;
