@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Thunder.iml" filepath="$PROJECT_DIR$/Thunder.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/thunder/thunder.iml" filepath="$PROJECT_DIR$/thunder/thunder.iml" />
     </modules>
   </component>
 </project>
