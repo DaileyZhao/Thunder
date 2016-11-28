@@ -10,8 +10,9 @@ import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewConfiguration;
 
-import com.zcm.practice.thunder.R;
-import com.zcm.practice.thunder.Util.MiscUtil;
+import com.android.thunder.R;
+import com.android.thunder.utils.MiscUtil;
+
 
 /**
  * Copyright(c) 2016 All Rights Reserved.
@@ -24,7 +25,7 @@ import com.zcm.practice.thunder.Util.MiscUtil;
  */
 public class RuleViewer extends View {
     private static final String TAG = "RuleViewer";
-    public static final int MAXHEIGHT=MiscUtil.dip2px(30);
+    public static final int MAXHEIGHT= MiscUtil.dip2px(30);
     public static final int MINHEIGHT=MiscUtil.dip2px(15);
     public static final int PERIODRULE = 1;
     public static final int WEIGHTRULE = 2;
@@ -52,7 +53,7 @@ public class RuleViewer extends View {
 
     private void init(){
         paint=new Paint();
-        paint.setColor(getResources().getColor(R.color.rel_black));
+        paint.setColor(getResources().getColor(R.color.black));
         paint.setStrokeWidth(MiscUtil.dip2px(0.8));
         paint.setAntiAlias(true);
         paint.setTextSize(24);

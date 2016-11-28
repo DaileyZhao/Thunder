@@ -6,8 +6,9 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.zcm.practice.thunder.R;
-import com.zcm.practice.thunder.Util.MiscUtil;
+
+import com.android.thunder.R;
+import com.android.thunder.utils.MiscUtil;
 
 import java.util.ArrayList;
 
@@ -71,7 +72,7 @@ public class RuleView extends View {
 
     private void init() {
         paint = new Paint();
-        paint.setColor(getResources().getColor(R.color.rel_black));
+        paint.setColor(getResources().getColor(R.color.black));
         paint.setStrokeWidth(MiscUtil.dip2px(0.8));
         paint.setAntiAlias(true);
     }

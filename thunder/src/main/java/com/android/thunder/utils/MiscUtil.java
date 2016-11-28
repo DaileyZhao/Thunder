@@ -2,6 +2,9 @@ package com.android.thunder.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.Environment;
 import android.view.Display;
 import android.view.WindowManager;
 
@@ -47,4 +50,27 @@ public class MiscUtil {
         return getDisplay(context).getHeight();
     }
 
+    /**
+     * 检测是否有sd卡
+     *
+     * @return
+     */
+    public static boolean checkSDCard() {
+        return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
+    }
+    /**
+     * 检查是否连接网络
+     *
+     * @param
+     * @return
+     */
+    public static boolean isNetworkConnected() {
+        ConnectivityManager mConnectivityManager = (ConnectivityManager) ThunderApplication.getContext().getSystemService(
+                Context.CONNECTIVITY_SERVICE);
+        NetworkInfo mNetworkInfo = mConnectivityManager.getActiveNetworkInfo();
+        if (mNetworkInfo != null) {
+            return mNetworkInfo.isAvailable();
+        }
+        return false;
+    }
 }
