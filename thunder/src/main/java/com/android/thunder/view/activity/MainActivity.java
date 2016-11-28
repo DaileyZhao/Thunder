@@ -16,4 +16,14 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
+    @Override
+    protected void initViews() {
+
+    }
+
+    @Override
+    protected void initVariables() {
+
+    }
 }

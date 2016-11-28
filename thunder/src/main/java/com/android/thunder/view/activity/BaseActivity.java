@@ -26,6 +26,8 @@ public abstract class BaseActivity extends Activity {
         setTheme(android.R.style.Theme_Material_Light);
         setContentView(R.layout.baseactivity);
         setContent();
+        initViews();
+        initVariables();
     }
     /**
      * 根据类名来绑定布局
@@ -52,4 +54,6 @@ public abstract class BaseActivity extends Activity {
         ((FrameLayout) findViewById(R.id.fm_root)).removeAllViews();
         ((FrameLayout) findViewById(R.id.fm_root)).addView(getContentView());
     }
+    protected abstract void initViews();
+    protected abstract void initVariables();
 }
