@@ -10,6 +10,8 @@ import com.android.thunder.R;
 
 import java.util.Locale;
 
+import butterknife.ButterKnife;
+
 /**
  * Copyright(c) 2016 All Rights Reserved.
  * Author: ZhaoCunming
@@ -23,9 +25,10 @@ public abstract class BaseActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(android.R.style.Theme_Material_Light);
+        setTheme(android.R.style.Theme_Material_Light_NoActionBar);
         setContentView(R.layout.baseactivity);
         setContent();
+        ButterKnife.bind(this);
         initViews();
         initVariables();
     }

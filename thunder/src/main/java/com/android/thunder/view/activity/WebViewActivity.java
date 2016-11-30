@@ -1,12 +1,10 @@
 package com.android.thunder.view.activity;
 
-import android.webkit.DownloadListener;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-
+import android.view.KeyEvent;
 import com.android.thunder.R;
+import com.android.thunder.view.view.WebViewBase;
+
+import butterknife.BindView;
 
 /**
  * Copyright(c) 2016 All Rights Reserved.
@@ -18,34 +16,24 @@ import com.android.thunder.R;
  * Description: TODO
  */
 public class WebViewActivity extends BaseActivity {
-    private WebView webView;
+    @BindView(R.id.webview)
+    WebViewBase webView;
+    private String url="https://www.baidu.com/";
     @Override
     protected void initViews() {
-        webView= (WebView) findViewById(R.id.webview);
     }
 
     @Override
     protected void initVariables() {
-        WebSettings settings=webView.getSettings();
-        settings.setPluginState(WebSettings.PluginState.ON);
-        settings.setJavaScriptEnabled(true);
-        settings.setDomStorageEnabled(true);
-        settings.setGeolocationEnabled(true);
-        settings.setJavaScriptCanOpenWindowsAutomatically(true);
-        settings.setUseWideViewPort(true);
-        webView.setDownloadListener(new DownloadListener() {
-            @Override
-            public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimetype, long contentLength) {
+        webView.loadUrl(url);
+    }
 
-            }
-        });
-        webView.setWebChromeClient(new WebChromeClient());
-        webView.setWebViewClient(new WebViewClient(){
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                webView.loadUrl(url);
-                return true;
-            }
-        });
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK) && webView.canGoBack()) {
+            webView.goBack(); //goBack()表示返回WebView的上一页面
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

@@ -1,7 +1,6 @@
 package com.android.thunder.http;
 
-import com.hpw.mvpframe.CoreApp;
-import com.hpw.mvpframe.utils.NetUtils;
+import com.android.thunder.utils.MiscUtil;
 
 import java.io.IOException;
 
@@ -17,13 +16,13 @@ public class CacheInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
-        if (!NetUtils.isConnected(CoreApp.getAppContext())) {
+        if (!MiscUtil.isNetworkConnected()) {
             request = request.newBuilder()
                     .cacheControl(CacheControl.FORCE_CACHE)
                     .build();
         }
         Response response = chain.proceed(request);
-        if (NetUtils.isConnected(CoreApp.getAppContext())) {
+        if (MiscUtil.isNetworkConnected()) {
             int maxAge = 0;
             // 有网络时, 不缓存, 最大保存时长为0
             response.newBuilder()

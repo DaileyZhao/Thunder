@@ -5,10 +5,13 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Message;
 import android.util.AttributeSet;
+import android.webkit.GeolocationPermissions;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
+import org.apache.http.HttpStatus;
 
 /**
  * Copyright(c) 2016 All Rights Reserved.
@@ -20,12 +23,23 @@ import android.webkit.WebViewClient;
  * Description: TODO
  */
 public class WebViewBase extends WebView {
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    private String title;
     public WebViewBase(Context context) {
-        this(context,null);
+        super(context);
+        init();
     }
 
     public WebViewBase(Context context, AttributeSet attrs) {
-        this(context, attrs,0);
+        super(context, attrs);
+        init();
     }
 
     public WebViewBase(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -37,6 +51,10 @@ public class WebViewBase extends WebView {
         WebSettings webSettings = this.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webSettings.setSupportZoom(true);
+        webSettings.setDomStorageEnabled(true);
+        webSettings.setGeolocationEnabled(true);
+        webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
+        webSettings.setUseWideViewPort(true);
         this.setWebViewClient(mWebViewClientBase);
         this.setWebChromeClient(mWebChromeClientBase);
     }
@@ -45,7 +63,8 @@ public class WebViewBase extends WebView {
     private class WebViewClientBase extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            return super.shouldOverrideUrlLoading(view, url);
+            view.loadUrl(url);
+            return true;
         }
 
         @Override
@@ -60,7 +79,12 @@ public class WebViewBase extends WebView {
 
         @Override
         public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-            super.onReceivedError(view, errorCode, description, failingUrl);
+            switch(errorCode)
+            {
+                case HttpStatus.SC_NOT_FOUND:
+                    view.loadUrl("file:///android_assets/error_handle.html");
+                    break;
+            }
         }
 
         @Override
@@ -75,8 +99,7 @@ public class WebViewBase extends WebView {
 
         @Override
         public void onReceivedTitle(WebView view, String title) {
-            // TODO Auto-generated method stub
-            super.onReceivedTitle(view, title);
+            setTitle(title);
         }
 
         @Override
@@ -91,6 +114,12 @@ public class WebViewBase extends WebView {
                                       boolean isUserGesture, Message resultMsg) {
             // TODO Auto-generated method stub
             return super.onCreateWindow(view, isDialog, isUserGesture, resultMsg);
+        }
+
+        @Override
+        public void onGeolocationPermissionsShowPrompt(String origin, GeolocationPermissions.Callback callback) {
+            callback.invoke(origin,true,false);
+            super.onGeolocationPermissionsShowPrompt(origin, callback);
         }
     }
 }
