@@ -3,9 +3,17 @@ package com.android.thunder.view.activity;
 import android.content.Intent;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.thunder.ThunderApplication;
+import com.android.thunder.R;
+import com.android.thunder.http.ApiServers;
+import com.android.thunder.http.HttpControl;
+import com.android.thunder.http.ResponseListener;
+
+import org.json.JSONObject;
+
+import butterknife.BindView;
 
 /**
  * Copyright(c) 2016 All Rights Reserved.
@@ -17,16 +25,44 @@ import com.android.thunder.ThunderApplication;
  * Description: TODO
  */
 public class MainActivity extends BaseActivity {
+    private static final String TAG = "MainActivity";
     private long lastExitRequestTime;
-
+    @BindView(R.id.tv_post)
+    TextView tv_post;
     @Override
     protected void initViews() {
-
     }
 
     @Override
     protected void initVariables() {
-        //HttpMethods.createApi(ApiServers.class).getPostMessage("zhongtong","701223137508");
+       ApiServers api= HttpControl.retrofit();
+        HttpControl.buildHttpRequest(api.getPostMessage("zhongtong", "419738635979"), new ResponseListener() {
+            @Override
+            public void onSuccess(JSONObject object) {
+                String post=object.optString("message");
+                tv_post.setText(post);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onFail(JSONObject object) {
+
+            }
+
+            @Override
+            public void showProgress() {
+
+            }
+
+            @Override
+            public void disMissProgress() {
+
+            }
+        });
     }
     public void onclick(View view){
         startActivity(new Intent(this,WebViewActivity.class));

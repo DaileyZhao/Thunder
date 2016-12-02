@@ -26,10 +26,6 @@ public abstract class BaseActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (Build.VERSION.SDK_INT>Build.VERSION_CODES.KITKAT_WATCH)
-        setTheme(android.R.style.Theme_Material_Light_NoActionBar);
-        else
-        setTheme(android.R.style.Theme_Holo_Light_NoActionBar);
         setContentView(R.layout.baseactivity);
         setContent();
         ButterKnife.bind(this);

@@ -14,6 +14,11 @@ import android.content.Context;
  */
 public class ThunderApplication extends Application {
     private static Context context;
+    private static boolean mDebug = true;
+
+    public static boolean isDebug(){
+        return mDebug;
+    }
     public static Context getContext(){
         return context;
     }
