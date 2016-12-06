@@ -3,7 +3,7 @@
 <data>
     <variable
         name="user"
-        type="com.android.mvvmlight.bean.UserBean"/>
+        type="com.android.mvvmlight.model.UserBean"/>
     <variable
         name="loginviewmodel"
         type="com.android.mvvmlight.viewmodel.LoginViewModel"/>

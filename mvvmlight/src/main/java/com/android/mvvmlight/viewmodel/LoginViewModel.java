@@ -4,7 +4,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.android.mvvmlight.MvvmApplication;
-import com.android.mvvmlight.bean.UserBean;
+import com.android.mvvmlight.model.UserBean;
 
 /**
  * Copyright(c) 2016 All Rights Reserved.
