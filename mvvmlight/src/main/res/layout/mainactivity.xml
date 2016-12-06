@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<data>
+    <variable
+        name="user"
+        type="com.android.mvvmlight.bean.UserBean"/>
+    <variable
+        name="loginviewmodel"
+        type="com.android.mvvmlight.viewmodel.LoginViewModel"/>
+</data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="200dp"
+            android:hint="username"
+            android:text="@{user.username}"/>
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="password"
+            android:text="@{user.password}"/>
+        <EditText
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:hint="username"
+            android:onTextChanged="@{loginviewmodel::onTextChanged}"/>
+
+        <EditText
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:hint="password"
+            android:onTextChanged="@{loginviewmodel::ontextchanged2}"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{loginviewmodel::onClick}"
+            android:text="登录" />
+    </LinearLayout>
+</layout>
