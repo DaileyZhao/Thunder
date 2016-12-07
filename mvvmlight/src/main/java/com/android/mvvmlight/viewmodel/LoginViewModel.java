@@ -1,5 +1,8 @@
 package com.android.mvvmlight.viewmodel;
 
+import android.databinding.ObservableBoolean;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.Toast;
 
@@ -17,6 +20,22 @@ import com.android.mvvmlight.model.UserBean;
  */
 public class LoginViewModel {
     UserBean userBean=new UserBean("","");
+    public ObservableBoolean isShow=new ObservableBoolean();
+    private Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            isShow.set(false);
+            switch (msg.what){
+                case 0x001:
+                    Toast.makeText(MvvmApplication.getContext(),"登录成功!",Toast.LENGTH_SHORT).show();
+                    break;
+                case 0x002:
+                    Toast.makeText(MvvmApplication.getContext(),"登录失败!",Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+    };
     public void onTextChanged(CharSequence s, int start, int before, int count){
         userBean.setUsername(s.toString());
     }
@@ -24,10 +43,22 @@ public class LoginViewModel {
         userBean.setPassword(s.toString());
     }
     public void onClick(View view){
-        if (userBean.getUsername().equals("Jack Sparrow")&&userBean.getPassword().equals("123")){
-            Toast.makeText(MvvmApplication.getContext(),"登录成功!",Toast.LENGTH_SHORT).show();
-        }else {
-            Toast.makeText(MvvmApplication.getContext(),"登录失败!",Toast.LENGTH_SHORT).show();
-        }
+        isShow.set(true);
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                try {
+                    Thread.sleep(3000);
+                    if (userBean.getUsername().equals("Jack Sparrow")&&userBean.getPassword().equals("123")){
+                        handler.sendEmptyMessage(0x001);
+                    }else {
+                        handler.sendEmptyMessage(0x002);
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
     }
 }

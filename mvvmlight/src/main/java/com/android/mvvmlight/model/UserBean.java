@@ -21,6 +21,7 @@ public class UserBean extends BaseObservable{
         this.username=username;
         this.password=password;
     }
+
     @Bindable
     public String getUsername() {
         return username;
@@ -28,6 +29,7 @@ public class UserBean extends BaseObservable{
 
     public void setUsername(String username) {
         this.username = username;
+        notifyPropertyChanged(BR.username);
     }
 
     @Bindable
@@ -37,5 +39,6 @@ public class UserBean extends BaseObservable{
 
     public void setPassword(String password) {
         this.password = password;
+        notifyPropertyChanged(BR.password);
     }
 }
