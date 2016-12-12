@@ -29,12 +29,15 @@ public class MainActivity extends BaseActivity {
     private long lastExitRequestTime;
     @BindView(R.id.tv_post)
     TextView tv_post;
+    Intent intent=new Intent();
     @Override
     protected void initViews() {
     }
 
     @Override
     protected void initVariables() {
+        intent.setAction("TEST_SERVICE");
+        startService(intent);
        ApiServers api= HttpControl.retrofit();
         HttpControl.buildHttpRequest(api.getPostMessage("zhongtong", "419738635979"), new ResponseListener() {
             @Override
@@ -91,5 +94,11 @@ public class MainActivity extends BaseActivity {
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopService(intent);
     }
 }

@@ -6,8 +6,8 @@ import android.os.Bundle;
 
 import com.android.mvvmlight.BR;
 import com.android.mvvmlight.R;
-import com.android.mvvmlight.model.UserBean;
 import com.android.mvvmlight.databinding.MainactivityBinding;
+import com.android.mvvmlight.model.UserBean;
 import com.android.mvvmlight.viewmodel.LoginViewModel;
 
 /**
