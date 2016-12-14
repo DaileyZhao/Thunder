@@ -3,14 +3,17 @@ package com.android.thunder.view.activity;
 import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 
 import com.android.thunder.R;
+import com.android.thunder.view.view.BaseTitleView;
 
 import java.util.Locale;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -23,14 +26,26 @@ import butterknife.ButterKnife;
  * Description: TODO
  */
 public abstract class BaseActivity extends Activity {
+    @BindView(R.id.fm_title)
+    protected FrameLayout fm_title;
+    @BindView(R.id.bt_title)
+    protected BaseTitleView bt_title;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.baseactivity);
+        setTitlebar();
         setContent();
         ButterKnife.bind(this);
         initViews();
         initVariables();
+        bt_title.getLeftTextView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        bt_title.setLeftImageResources(R.drawable.titlebar_btn_return);
     }
     /**
      * 根据类名来绑定布局
@@ -56,6 +71,8 @@ public abstract class BaseActivity extends Activity {
     private void setContent(){
         ((FrameLayout) findViewById(R.id.fm_root)).removeAllViews();
         ((FrameLayout) findViewById(R.id.fm_root)).addView(getContentView());
+    }
+    private void setTitlebar(){
     }
     protected abstract void initViews();
     protected abstract void initVariables();

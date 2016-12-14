@@ -24,4 +24,12 @@
         <!--一个刻度的大小-->
         <attr name="one_item_value" format="integer" />
     </declare-styleable>
+    <declare-styleable name="BaseTitleView">
+        <attr name="leftText" format="reference"/>
+        <attr name="leftRes" format="reference"/> ,
+        <attr name="titleText" format="reference"/>
+        <attr name="rightText" format="reference"/>
+        <attr name="rightRes" format="reference"/>
+        <attr name="lineShow" format="boolean"/>
+    </declare-styleable>
 </resources>

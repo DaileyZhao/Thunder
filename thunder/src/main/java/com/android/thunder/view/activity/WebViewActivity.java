@@ -21,6 +21,7 @@ public class WebViewActivity extends BaseActivity {
     private String url="https://www.baidu.com/";
     @Override
     protected void initViews() {
+        bt_title.setTitleText(webView.getTitle());
     }
 
     @Override
