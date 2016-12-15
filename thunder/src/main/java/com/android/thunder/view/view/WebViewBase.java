@@ -23,15 +23,13 @@ import org.apache.http.HttpStatus;
  * Description: TODO
  */
 public class WebViewBase extends WebView {
-    public String getTitle() {
-        return title;
+    public interface OnWebCallBack{
+        void getTitle(String title);
     }
-
-    public void setTitle(String title) {
-        this.title = title;
+    private OnWebCallBack onWebCallBack;
+    public void setOnWebCallBack(OnWebCallBack onWebCallBack){
+        this.onWebCallBack=onWebCallBack;
     }
-
-    private String title;
     public WebViewBase(Context context) {
         super(context);
         init();
@@ -99,7 +97,9 @@ public class WebViewBase extends WebView {
 
         @Override
         public void onReceivedTitle(WebView view, String title) {
-            setTitle(title);
+            if (onWebCallBack!=null){
+                onWebCallBack.getTitle(title);
+            }
         }
 
         @Override
