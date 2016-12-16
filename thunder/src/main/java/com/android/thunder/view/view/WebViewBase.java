@@ -10,6 +10,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 
 import org.apache.http.HttpStatus;
 
@@ -26,26 +27,34 @@ public class WebViewBase extends WebView {
     public interface OnWebCallBack{
         void getTitle(String title);
     }
+    private Context context ;
+    private ProgressBar progressbar ;
     private OnWebCallBack onWebCallBack;
     public void setOnWebCallBack(OnWebCallBack onWebCallBack){
         this.onWebCallBack=onWebCallBack;
     }
     public WebViewBase(Context context) {
         super(context);
+        this.context = context ;
         init();
     }
 
     public WebViewBase(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.context = context ;
         init();
     }
 
     public WebViewBase(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        this.context = context ;
         init();
     }
     @SuppressLint("SetJavaScriptEnabled")
     private void init(){
+        progressbar = new ProgressBar( context , null , android.R.attr.progressBarStyleHorizontal);
+        progressbar.setLayoutParams( new LayoutParams(LayoutParams.MATCH_PARENT, 20 , 0, 0 ));
+        addView( progressbar ) ;
         WebSettings webSettings = this.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webSettings.setSupportZoom(true);
@@ -53,11 +62,27 @@ public class WebViewBase extends WebView {
         webSettings.setGeolocationEnabled(true);
         webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
         webSettings.setUseWideViewPort(true);
+        this.setVerticalScrollBarEnabled(true);
         this.setWebViewClient(mWebViewClientBase);
         this.setWebChromeClient(mWebChromeClientBase);
     }
     private WebViewClientBase mWebViewClientBase = new WebViewClientBase();
     private WebChromeClientBase mWebChromeClientBase = new WebChromeClientBase();
+
+    @Override
+    protected void onScrollChanged(int l, int t, int oldl, int oldt) {
+        LayoutParams lp = (LayoutParams) progressbar.getLayoutParams();
+        lp.x = l;
+        lp.y = t;
+        progressbar.setLayoutParams(lp);
+        super.onScrollChanged(l, t, oldl, oldt);
+    }
+
+    @Override
+    protected int computeVerticalScrollRange() {
+        return super.computeVerticalScrollRange();
+    }
+
     private class WebViewClientBase extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -93,6 +118,13 @@ public class WebViewBase extends WebView {
     private class WebChromeClientBase extends WebChromeClient {
         @Override
         public void onProgressChanged(WebView view, int newProgress) {
+            if (newProgress == 100) {
+                progressbar.setVisibility(GONE);
+            } else {
+                progressbar.setVisibility(VISIBLE);
+                progressbar.setProgress(newProgress);
+            }
+            super.onProgressChanged(view, newProgress);
         }
 
         @Override
