@@ -1,8 +1,13 @@
 package com.android.thunder.view.activity;
 
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -12,6 +17,10 @@ import com.android.thunder.http.HttpControl;
 import com.android.thunder.http.ResponseListener;
 
 import org.json.JSONObject;
+
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.TreeSet;
 
 import butterknife.BindView;
 import okhttp3.OkHttpClient;
@@ -36,7 +45,10 @@ public class MainActivity extends BaseActivity {
     private long lastExitRequestTime;
     @BindView(R.id.tv_post)
     TextView tv_post;
+    @BindView(R.id.flow_layout)
+    LinearLayout flow_layout;
     Intent intent=new Intent();
+    String[] illness={"沙眼","寻常型银屑病","慢性结膜炎","结膜炎","白内障","青光眼"};
     @Override
     protected void initViews() {
         bt_title.setTitleText("闪电");
@@ -47,6 +59,17 @@ public class MainActivity extends BaseActivity {
         intent.setAction("TEST_SERVICE");
 //        startService(intent);
        // getPostMessage();
+        TreeSet ts = new TreeSet(new ComparatorByLength());
+        Iterator it = ts.iterator();
+        StringBuilder illstringbuilder=new StringBuilder();
+        for (int i=0;i<illness.length;i++){
+            ts.add(illness[i]);
+        }
+        while (it.hasNext())
+        {
+         illstringbuilder.append(it.next().toString()).append(",");
+        }
+        flow_layout.addView(new LinearLayout(this),new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         ApiServers api= HttpControl.retrofit();
         HttpControl.buildHttpRequest(api.getPostMessage("zhongtong", "419738635979"), new ResponseListener() {
             @Override
@@ -75,6 +98,15 @@ public class MainActivity extends BaseActivity {
 
             }
         });
+        getMermoryLimited(this);
+    }
+    public void FlowLayout(String[] illness){
+        for (int i=0;i<illness.length;i++){
+            if (illness[i].length()>=6){
+            LinearLayout holeline=new LinearLayout(this);
+                holeline.addView(new TextView(this));
+            }
+        }
     }
     public void onclick(View view){
         startActivity(new Intent(this,WebViewActivity.class));
@@ -94,6 +126,13 @@ public class MainActivity extends BaseActivity {
 
     public void goHome() {
         moveTaskToBack(true);
+    }
+
+    public void getMermoryLimited(Context context){
+        ActivityManager activityManager= (ActivityManager) context.getSystemService(ACTIVITY_SERVICE);
+        Log.e(TAG, "getMermoryLimited: "+activityManager.getMemoryClass() );
+        Log.e(TAG, "getMermoryLimited: "+activityManager.getLargeMemoryClass() );
+        Log.e(TAG, "getMermoryLimited: "+Runtime.getRuntime().maxMemory()/(1024*1024)+"MB" );
     }
 
     @Override
@@ -140,5 +179,17 @@ public class MainActivity extends BaseActivity {
                         tv_post.setText(s);
                     }
                 });
+    }
+
+    class ComparatorByLength implements Comparator {   //定义比较器
+
+        @Override
+        public int compare(Object o1, Object o2) {
+            String s1 = (String) o1;
+            String s2 = (String) o2;
+            int temp = s1.length() - s2.length();
+            return temp == 0 ? temp:s1.compareTo(s2);
+        }
+
     }
 }
