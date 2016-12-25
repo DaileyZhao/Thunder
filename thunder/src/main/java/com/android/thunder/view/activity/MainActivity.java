@@ -15,11 +15,14 @@ import com.android.thunder.R;
 import com.android.thunder.http.ApiServers;
 import com.android.thunder.http.HttpControl;
 import com.android.thunder.http.ResponseListener;
+import com.android.thunder.view.view.RulerWheel;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.List;
 import java.util.TreeSet;
 
 import butterknife.BindView;
@@ -47,6 +50,10 @@ public class MainActivity extends BaseActivity {
     TextView tv_post;
     @BindView(R.id.flow_layout)
     LinearLayout flow_layout;
+    @BindView(R.id.rulerWheel)
+    RulerWheel rulerWheel;
+    @BindView(R.id.curValue_tv)
+    TextView curValue_tv;
     Intent intent=new Intent();
     String[] illness={"沙眼","寻常型银屑病","慢性结膜炎","结膜炎","白内障","青光眼"};
     @Override
@@ -56,20 +63,30 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initVariables() {
-        intent.setAction("TEST_SERVICE");
-//        startService(intent);
-       // getPostMessage();
-        TreeSet ts = new TreeSet(new ComparatorByLength());
-        Iterator it = ts.iterator();
-        StringBuilder illstringbuilder=new StringBuilder();
-        for (int i=0;i<illness.length;i++){
-            ts.add(illness[i]);
+        List<String> list = new ArrayList<>();
+        for (int i = 30; i < 150; i += 1) {
+            list.add(i + "");
+            for (int j = 1; j < 10; j++) {
+                list.add(i + "." + j);
+            }
         }
-        while (it.hasNext())
-        {
-         illstringbuilder.append(it.next().toString()).append(",");
-        }
-        flow_layout.addView(new LinearLayout(this),new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        rulerWheel.setData(list);
+        rulerWheel.setScrollingListener(new RulerWheel.OnWheelScrollListener() {
+            @Override
+            public void onChanged(RulerWheel wheel, Object oldValue, Object newValue) {
+                curValue_tv.setText(newValue + "");
+            }
+
+            @Override
+            public void onScrollingStarted(RulerWheel wheel) {
+
+            }
+
+            @Override
+            public void onScrollingFinished(RulerWheel wheel) {
+
+            }
+        });
         ApiServers api= HttpControl.retrofit();
         HttpControl.buildHttpRequest(api.getPostMessage("zhongtong", "419738635979"), new ResponseListener() {
             @Override

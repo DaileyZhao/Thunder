@@ -94,8 +94,8 @@ public class RulerView extends View {
         windowManager.getDefaultDisplay().getMetrics(dm);
         screenWidth = dm.widthPixels;
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.RulerView);
-        maxValue = typedArray.getDimensionPixelOffset(R.styleable.RulerView_max_value, 200000);
-        minValue = typedArray.getDimensionPixelOffset(R.styleable.RulerView_min_value, 0);
+        maxValue = typedArray.getDimensionPixelOffset(R.styleable.RulerView_rule_max_value, 200000);
+        minValue = typedArray.getDimensionPixelOffset(R.styleable.RulerView_rule_min_value, 0);
         scaleTextSize = typedArray.getDimensionPixelOffset(R.styleable.RulerView_scale_text_size, 24);
         scaleTextColor = typedArray.getColor(R.styleable.RulerView_scale_text_color, Color.parseColor("#d8d8d8"));
         scaleSelectColor = typedArray.getColor(R.styleable.RulerView_scale_select_color, Color.parseColor("#76e4ff"));

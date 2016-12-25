@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center_horizontal">
+    android:gravity="center_horizontal"
+    tools:context="com.android.thunder.view.activity.MainActivity">
 <Button
     android:onClick="onclick"
     android:layout_width="wrap_content"
@@ -14,6 +17,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="aaaaaa"/>
+    <TextView
+        android:id="@+id/curValue_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:text="20"
+        android:textColor="#ff0989"
+        android:textSize="20sp"/>
+    <com.android.thunder.view.view.RulerWheel
+        android:id="@+id/rulerWheel"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:MaxBarSize="2dp"
+        app:MidBarSize="1.5dp"
+        app:MinBarSize="1dp"
+        app:lineColorMax="#797979"
+        app:lineColorMid="#797979"
+        app:lineColorMin="#797979"
+        app:line_divider="10dp"
+        app:mask_bg="@mipmap/icon_arrow"
+        app:max_value="100"
+        app:min_value="0"
+        app:mode="SCALE"
+        app:scaleWidth="1dp"
+        app:showGradient="true"
+        app:showScaleValue="true"
+        app:text_Size="30"
+        app:text_color="#e21d6f"/>
     <LinearLayout
         android:id="@+id/flow_layout"
         android:layout_width="match_parent"

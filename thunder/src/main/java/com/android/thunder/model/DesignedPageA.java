@@ -13,7 +13,10 @@ public class DesignedPageA extends DesignedPage {
 
     @Override
     public void setPosition() {
-
+        String resstring="";
+        switch (resstring){
+            case "123":break;
+        }
     }
 
     @Override
