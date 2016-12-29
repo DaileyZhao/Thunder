@@ -128,6 +128,9 @@ public class MainActivity extends BaseActivity {
     public void onclick(View view){
         startActivity(new Intent(this,WebViewActivity.class));
     }
+    public void click(View view){
+        startActivity(new Intent(this,RecyclerViewActivity.class));
+    }
     /**
      * 三秒内两次点击 以退出(回桌面)
      */

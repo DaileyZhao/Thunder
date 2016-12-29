@@ -21,6 +21,8 @@
         </activity>
         <activity android:name=".view.activity.WebViewActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".view.activity.RecyclerViewActivity"
+            android:screenOrientation="portrait"/>
         <service android:name=".services.DownloadService">
             <intent-filter>
                 <action android:name="TEST_SERVICE"/>

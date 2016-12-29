@@ -17,6 +17,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="aaaaaa"/>
+    <Button
+        android:onClick="click"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="recycleview"/>
     <TextView
         android:id="@+id/curValue_tv"
         android:layout_width="wrap_content"

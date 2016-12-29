@@ -1,7 +1,11 @@
 package com.android.thunder.view.activity;
 
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import com.android.thunder.R;
+import com.android.thunder.view.adapter.RecyclerAdapter;
+import com.android.thunder.view.view.RecycleDivider;
+
 import butterknife.BindView;
 
 /**
@@ -18,7 +22,14 @@ public class RecyclerViewActivity extends BaseActivity {
     RecyclerView recyclerlistview;
     @Override
     protected void initViews() {
-
+        //  创建线性布局管理器（默认是垂直方向）
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerlistview.setLayoutManager(layoutManager);
+        //  创建列表项分隔线对象
+        RecyclerView.ItemDecoration itemDecoration=new RecycleDivider(this);
+        recyclerlistview.addItemDecoration(itemDecoration);
+        RecyclerAdapter recyclerAdapter=new RecyclerAdapter(this);
+        recyclerlistview.setAdapter(recyclerAdapter);
     }
 
     @Override
