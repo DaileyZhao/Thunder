@@ -117,14 +117,6 @@ public class MainActivity extends BaseActivity {
         });
         getMermoryLimited(this);
     }
-    public void FlowLayout(String[] illness){
-        for (int i=0;i<illness.length;i++){
-            if (illness[i].length()>=6){
-            LinearLayout holeline=new LinearLayout(this);
-                holeline.addView(new TextView(this));
-            }
-        }
-    }
     public void onclick(View view){
         startActivity(new Intent(this,WebViewActivity.class));
     }
@@ -143,7 +135,16 @@ public class MainActivity extends BaseActivity {
             lastExitRequestTime = System.currentTimeMillis();
         }
     }
-
+    private void createView(String[] names){
+        for (String name:names){
+            TextView textname=new TextView(this);
+            textname.setText(name);
+            //定义子View中两个元素的布局
+            ViewGroup.LayoutParams vlp = new ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
+        }
+    }
     public void goHome() {
         moveTaskToBack(true);
     }
