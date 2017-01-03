@@ -4,6 +4,7 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.android.thunder.R;
 import com.android.thunder.http.ApiServers;
 import com.android.thunder.http.HttpControl;
 import com.android.thunder.http.ResponseListener;
+import com.android.thunder.utils.MiscUtil;
 import com.android.thunder.view.view.RulerWheel;
 
 import org.json.JSONObject;
@@ -116,6 +118,7 @@ public class MainActivity extends BaseActivity {
             }
         });
         getMermoryLimited(this);
+        createView(illness,flow_layout);
     }
     public void onclick(View view){
         startActivity(new Intent(this,WebViewActivity.class));
@@ -135,14 +138,29 @@ public class MainActivity extends BaseActivity {
             lastExitRequestTime = System.currentTimeMillis();
         }
     }
-    private void createView(String[] names){
+    private void createView(String[] names,LinearLayout linearlayout){
         for (String name:names){
             TextView textname=new TextView(this);
             textname.setText(name);
+            textname.setTextSize(MiscUtil.dip2px(14));
+            textname.setPadding(10,10,10,10);
+            textname.setGravity(Gravity.CENTER);
+            if (name.length()>=6){
             //定义子View中两个元素的布局
             ViewGroup.LayoutParams vlp = new ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT);
+            textname.setLayoutParams(vlp);
+            linearlayout.addView(textname);
+            }else {
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                // View view =LayoutInflater.from(this).inflate(R.layout.view_item, null);//也可以从XML中加载布局
+                LinearLayout view = new LinearLayout(this);
+                view.setLayoutParams(lp);//设置布局参数
+                view.setOrientation(LinearLayout.HORIZONTAL);
+                linearlayout.addView(view);
+            }
         }
     }
     public void goHome() {
