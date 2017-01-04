@@ -3,12 +3,15 @@ package com.android.thunder.view.activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,8 +59,22 @@ public class MainActivity extends BaseActivity {
     RulerWheel rulerWheel;
     @BindView(R.id.curValue_tv)
     TextView curValue_tv;
+    @BindView(R.id.test_progressbar)
+    ProgressBar test_progressbar;
     Intent intent=new Intent();
+    int pro=0;
     String[] illness={"沙眼","寻常型银屑病","慢性结膜炎","结膜炎","白内障","青光眼"};
+    private Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case 0x001:
+                    test_progressbar.setProgress(pro);
+                    break;
+            }
+        }
+    };
     @Override
     protected void initViews() {
         bt_title.setTitleText("闪电");
@@ -126,6 +143,23 @@ public class MainActivity extends BaseActivity {
     public void click(View view){
         startActivity(new Intent(this,RecyclerViewActivity.class));
     }
+    public void tv_click(View view){
+        test_progressbar.setProgress(0);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int i=0;i<100;i++){
+                    pro++;
+                    handler.sendEmptyMessage(0x001);
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
+    }
     /**
      * 三秒内两次点击 以退出(回桌面)
      */
@@ -186,7 +220,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        stopService(intent);
+//        stopService(intent);
     }
     private void getPostMessage(){
         String baseUrl ="http://www.kuaidi100.com";

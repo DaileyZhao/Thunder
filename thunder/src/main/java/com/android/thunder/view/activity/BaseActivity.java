@@ -3,6 +3,7 @@ package com.android.thunder.view.activity;
 import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Debug;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,6 +47,7 @@ public abstract class BaseActivity extends Activity {
             }
         });
         bt_title.setLeftImageResources(R.drawable.titlebar_btn_return);
+        Debug.startMethodTracing();
     }
     /**
      * 根据类名来绑定布局
@@ -76,4 +78,10 @@ public abstract class BaseActivity extends Activity {
     }
     protected abstract void initViews();
     protected abstract void initVariables();
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Debug.stopMethodTracing();
+    }
 }
