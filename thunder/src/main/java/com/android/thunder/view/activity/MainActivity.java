@@ -71,6 +71,7 @@ public class MainActivity extends BaseActivity {
             }
         }
         rulerWheel.setData(list);
+        rulerWheel.setSelectedValue("100");
         rulerWheel.setScrollingListener(new RulerWheel.OnWheelScrollListener() {
             @Override
             public void onChanged(RulerWheel wheel, Object oldValue, Object newValue) {

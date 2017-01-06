@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.nfc.NfcManager;
 import android.os.Environment;
 import android.view.Display;
 import android.view.WindowManager;
@@ -72,5 +73,8 @@ public class MiscUtil {
             return mNetworkInfo.isAvailable();
         }
         return false;
+    }
+    public static void getNFCAdapter(Context context){
+        NfcManager nfcManager= (NfcManager) context.getSystemService(Context.NFC_SERVICE);
     }
 }

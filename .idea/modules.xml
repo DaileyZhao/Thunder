@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Thunder.iml" filepath="$PROJECT_DIR$/Thunder.iml" />
+      <module fileurl="file://$PROJECT_DIR$/javalib/javalib.iml" filepath="$PROJECT_DIR$/javalib/javalib.iml" />
       <module fileurl="file://$PROJECT_DIR$/mvvmlight/mvvmlight.iml" filepath="$PROJECT_DIR$/mvvmlight/mvvmlight.iml" />
       <module fileurl="file://$PROJECT_DIR$/thunder/thunder.iml" filepath="$PROJECT_DIR$/thunder/thunder.iml" />
     </modules>

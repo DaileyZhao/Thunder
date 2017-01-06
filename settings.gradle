@@ -1,1 +1,1 @@
-include ':thunder', ':mvvmlight'
+include ':thunder', ':mvvmlight', ':javalib'
