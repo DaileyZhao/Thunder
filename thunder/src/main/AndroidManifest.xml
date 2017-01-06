@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <application
         android:name=".ThunderApplication"
         android:allowBackup="true"
@@ -21,6 +22,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.activity.WebViewActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.activity.RecyclerViewActivity"
             android:screenOrientation="portrait"/>
         <service android:name=".services.DownloadService">
             <intent-filter>
