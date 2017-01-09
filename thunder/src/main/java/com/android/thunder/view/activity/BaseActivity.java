@@ -1,10 +1,8 @@
 package com.android.thunder.view.activity;
 
 import android.app.Activity;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Debug;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -38,8 +36,6 @@ public abstract class BaseActivity extends Activity {
         setTitlebar();
         setContent();
         ButterKnife.bind(this);
-        initViews();
-        initVariables();
         bt_title.getLeftTextView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,8 +72,6 @@ public abstract class BaseActivity extends Activity {
     }
     private void setTitlebar(){
     }
-    protected abstract void initViews();
-    protected abstract void initVariables();
 
     @Override
     protected void onDestroy() {

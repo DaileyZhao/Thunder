@@ -1,5 +1,6 @@
 package com.android.thunder.view.activity;
 
+import android.os.Bundle;
 import android.view.KeyEvent;
 
 import com.android.thunder.R;
@@ -20,20 +21,18 @@ public class WebViewActivity extends BaseActivity {
     @BindView(R.id.webview)
     WebViewBase webView;
     private String url="https://www.baidu.com/";
+
     @Override
-    protected void initViews() {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         webView.setOnWebCallBack(new WebViewBase.OnWebCallBack(){
 
             @Override
             public void getTitle(String title) {
                 bt_title.setTitleText(title);
+                webView.loadUrl(url);
             }
         });
-    }
-
-    @Override
-    protected void initVariables() {
-        webView.loadUrl(url);
     }
 
     @Override
