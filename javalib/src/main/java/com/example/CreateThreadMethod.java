@@ -1,5 +1,6 @@
 package com.example;
 
+import java.util.ArrayList;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -96,6 +97,12 @@ public class CreateThreadMethod {
         try {
             new NewThread3().call();
             futureDemo();
+            ArrayList<Integer> array=new ArrayList<Integer>();
+            array.add(1);//这样调用add方法只能存储整形，因为泛型类型的实例为Integer
+            array.getClass().getMethod("add", Object.class).invoke(array, "asd");
+            for (int i=0;i<array.size();i++) {
+                System.out.println(array.get(i));
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
