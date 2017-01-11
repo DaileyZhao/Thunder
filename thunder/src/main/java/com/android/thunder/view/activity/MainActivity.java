@@ -4,6 +4,7 @@ import android.app.ActivityManager;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -13,6 +14,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.android.thunder.R;
+import com.android.thunder.services.DownloadService;
 import com.android.thunder.view.fragment.BaseFragment;
 import com.android.thunder.view.fragment.MainFragment;
 import com.android.thunder.view.fragment.MessageFragment;
@@ -106,6 +108,12 @@ public class MainActivity extends BaseActivity {
             }
         });
         rb_tab1.setChecked(true);
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        startService(new Intent(this, DownloadService.class));
     }
     //隐藏所有Fragment
     private void hideAllFragment(FragmentTransaction fragmentTransaction){
@@ -135,6 +143,7 @@ public class MainActivity extends BaseActivity {
         Log.e(TAG, "getMermoryLimited: "+activityManager.getMemoryClass() );
         Log.e(TAG, "getMermoryLimited: "+activityManager.getLargeMemoryClass() );
         Log.e(TAG, "getMermoryLimited: "+Runtime.getRuntime().maxMemory()/(1024*1024)+"MB" );
+        Log.e(TAG, "getMermoryLimited: "+Thread.currentThread().getName() );
     }
 
     @Override

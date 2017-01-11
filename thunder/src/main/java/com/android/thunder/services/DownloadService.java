@@ -31,7 +31,9 @@ public class DownloadService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.d(TAG, "onStartCommand: ");
+        Log.e(TAG, "onStartCommand: "+System.currentTimeMillis()/1000 );
+        Log.e(TAG, "onStartCommand: "+System.currentTimeMillis()/1000 );
+        Log.e(TAG, "onStartCommand: "+Thread.currentThread().getName() );
         return super.onStartCommand(intent, flags, startId);
     }
 
