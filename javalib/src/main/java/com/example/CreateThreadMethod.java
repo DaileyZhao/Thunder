@@ -91,6 +91,22 @@ public class CreateThreadMethod {
             e.printStackTrace();
         }
     }
+    public static boolean contains(char[] a,char[] b){
+        int temp1=0,temp2=0;
+        for (int i=temp1;i<a.length;i++){
+            temp1++;
+            for (int j=temp2;j<b.length;j++){
+                if (a[i]==b[j])
+                {
+                    temp2++;
+                    break;
+                }
+                else
+                    return false;
+            }
+        }
+        return true;
+    }
     public static void main(String[] args){
         new NewThread().start();
         new NewThread2().run();
@@ -106,5 +122,6 @@ public class CreateThreadMethod {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println(contains(new char[]{'a','b','c'},new char[]{'a','b','c','d'}));
     }
 }
