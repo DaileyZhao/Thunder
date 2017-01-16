@@ -119,9 +119,11 @@ public class CreateThreadMethod {
             for (int i=0;i<array.size();i++) {
                 System.out.println(array.get(i));
             }
+            System.out.println(array instanceof ArrayList<?>);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println(Thread.currentThread().getName());
         System.out.println(contains(new char[]{'a','b','c'},new char[]{'a','b','c','d'}));
     }
 }
