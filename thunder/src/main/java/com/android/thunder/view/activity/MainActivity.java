@@ -108,11 +108,6 @@ public class MainActivity extends BaseActivity {
             }
         });
         rb_tab1.setChecked(true);
-        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         startService(new Intent(this, DownloadService.class));
     }
     //隐藏所有Fragment
